@@ -10,6 +10,7 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import {fork} from 'child_process';
 import core from 'os'
+import cluster from 'cluster'
 
 //IMPORTS JS
 import __dirname from './utils.js';
@@ -27,9 +28,45 @@ const app = express();
 
 mongoose.connect(config.mongo.url,{useNewUrlParser:true,useUnifiedTopology:true}).then(()=>{console.log("Mongodb esta conectado");}).catch(()=>{console.log("Mongodb se se ha podido conectar"),process.exit()});
 
-const server = app.listen(config.PORT,()=>{console.log("Escuchando en puerto " + config.PORT)});
+// if (config.MODE === "cluster" && cluster.isPrimary) {
+//     const hilos = core.cpus().length;
+//     console.log(`Proceso principal: ${process.pid} comenzando con ${hilos} workers`);
+
+//     for (let i = 0; i < hilos; i++) {
+//       cluster.fork();
+//     }
+  
+//     // cluster.on("exit", (worker, _code, _signal) => {
+//     //   console.log(`El proceso ${worker.process.pid} se termino. Reiniciando proceso`);
+//     //   cluster.fork();
+//     // });
+//   }
+
+//   const server = app.listen(config.PORT,()=>{console.log("Escuchando en puerto " + config.PORT)});
+if (config.MODE === "cluster" && cluster.isPrimary) {
+    const hilos = core.cpus().length;
+    console.log(`Proceso iniciado: ${process.pid} con ${hilos} worker trabajando`);
+
+    for (let i = 0; i < hilos; i++) {
+      cluster.fork();
+    }
+  
+    cluster.on("exit", (worker, _code, _signal) => {
+      console.log(`El proceso ${worker.process.pid} fallo.`);
+      cluster.fork();
+    });
+  } 
+    const server = app.listen(config.PORT, () => {
+      console.log(
+        "Escuchando en puerto " + config.PORT
+      );
+    });
+    server.on("error", (error) =>
+      console.log(`Error en servidor ${error}`)
+    );
 
 export const io = new Server(server);
+
 
 process.on('uncaughtException',(err)=>{
     console.log('Captura de error: ', err)
@@ -127,11 +164,13 @@ app.get('/api/info', (req, res) => {
       argumentos: argumentos,
       rutaEjecucion: process.execPath,
       platforma: process.platform,
-      idProceso: process.pid,
       version: process.version,
       direccionProyecto: process.cwd(),
       memoriaReservada: process.memoryUsage().rss,
       procesadores: core.cpus().length,
+      port:config.PORT,
+      idProceso: process.pid,
+      modo:config.MODE
     };
     res.send(info);
   });
