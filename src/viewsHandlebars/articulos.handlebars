@@ -1,0 +1,13 @@
+
+<input type="button" onclick="location.href='/'" value="Registrar un articulo">
+
+<div class="pet-container">
+    {{#each productos}}
+    <div class="pet-card">
+        <p>{{this.title}}</p>
+        <p>{{this.price}}</p>
+        <p>{{this.description}}</p>
+        <img src={{this.thumbnail}}>
+    </div>
+    {{/each}}
+</div>

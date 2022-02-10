@@ -1,0 +1,41 @@
+{
+  "name": "c",
+  "version": "1.0.0",
+  "description": "C",
+  "main": "C",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/app"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/node": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.1",
+    "connect-mongo": "^4.6.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-handlebars": "^6.0.1",
+    "express-session": "^1.17.2",
+    "firebase": "^9.6.1",
+    "firebase-admin": "^10.0.1",
+    "minimist": "^1.2.5",
+    "mongodb": "^4.2.2",
+    "mongoose": "^6.1.5",
+    "multer": "^1.4.3",
+    "os": "^0.1.2",
+    "passport": "^0.5.2",
+    "passport-local": "^1.0.0",
+    "pug": "^3.0.2",
+    "session-file-store": "^1.5.0",
+    "socket.io": "^4.4.0",
+    "socket.io-express-session": "^0.1.3"
+  }
+}
