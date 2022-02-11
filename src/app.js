@@ -18,7 +18,7 @@ import upload from './service/upload.js';
 import {productos, usuario, mensajes} from './daos/index.js' 
 import products from './routes/products.js';
 import cart from './routes/cart.js'
-import config,{argumentos} from './config.js';
+import config,{argProcesados} from './config.js';
 import { baseSession } from './config.js';
 import {initializePassport} from './passport-config.js';
 
@@ -28,21 +28,6 @@ const app = express();
 
 mongoose.connect(config.mongo.url,{useNewUrlParser:true,useUnifiedTopology:true}).then(()=>{console.log("Mongodb esta conectado");}).catch(()=>{console.log("Mongodb se se ha podido conectar"),process.exit()});
 
-// if (config.MODE === "cluster" && cluster.isPrimary) {
-//     const hilos = core.cpus().length;
-//     console.log(`Proceso principal: ${process.pid} comenzando con ${hilos} workers`);
-
-//     for (let i = 0; i < hilos; i++) {
-//       cluster.fork();
-//     }
-  
-//     // cluster.on("exit", (worker, _code, _signal) => {
-//     //   console.log(`El proceso ${worker.process.pid} se termino. Reiniciando proceso`);
-//     //   cluster.fork();
-//     // });
-//   }
-
-//   const server = app.listen(config.PORT,()=>{console.log("Escuchando en puerto " + config.PORT)});
 if (config.MODE === "cluster" && cluster.isPrimary) {
     const hilos = core.cpus().length;
     console.log(`Proceso iniciado: ${process.pid} con ${hilos} worker trabajando`);
@@ -161,16 +146,14 @@ app.get('/views/articulos',(req,res)=>{
 //INFO
 app.get('/api/info', (req, res) => {
     const info = {
-      argumentos: argumentos,
+      argumentos: argProcesados,
       rutaEjecucion: process.execPath,
       platforma: process.platform,
       version: process.version,
       direccionProyecto: process.cwd(),
       memoriaReservada: process.memoryUsage().rss,
-      procesadores: core.cpus().length,
-      port:config.PORT,
+      procesadores: core.cpus().length, 
       idProceso: process.pid,
-      modo:config.MODE
     };
     res.send(info);
   });

@@ -1,17 +1,32 @@
 import __dirname from "./utils.js";
 import session from "express-session";
 import MongoStore from "connect-mongo";
-import minimist from 'minimist';
+import yargs from 'yargs';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-export let argumentos = minimist(process.argv.slice(2));
+const argumentos = yargs(process.argv.slice(2));
+export const argProcesados = argumentos.options({
+    port: {
+      alias: "p",
+      default: 8080,
+      describe: "Port to listen",
+      type: "number",
+    },
+    mode: {
+      alias: "m",
+      default: "fork",
+      describe: "Mode to run the server",
+      type: "string",
+      choices: ["fork", "cluster"],
+    },
+  }).argv;
 
 export default {
 
-    PORT:argumentos.p||8080,
-    MODE:argumentos.m||"fork",
+    PORT:argProcesados.port,
+    MODE:argProcesados.mode,
       
     fileSystem:{
         url:__dirname+'/files/'
