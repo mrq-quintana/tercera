@@ -20,7 +20,7 @@ import upload from './service/upload.js';
 import {productos, usuario, mensajes} from './daos/index.js' 
 import products from './routes/products.js';
 import cart from './routes/cart.js'
-import config,{argumentos} from './config.js';
+import config,{argProcesados} from './config.js';
 import { baseSession } from './config.js';
 import {initializePassport} from './passport-config.js';
 
@@ -177,16 +177,14 @@ app.get('/views/articulos',(req,res)=>{
 //INFO
 app.get('/api/info', (req, res) => {
     const info = {
-      argumentos: argumentos,
+      argumentos: argProcesados,
       rutaEjecucion: process.execPath,
       platforma: process.platform,
       version: process.version,
       direccionProyecto: process.cwd(),
       memoriaReservada: process.memoryUsage().rss,
-      procesadores: core.cpus().length,
-      port:config.PORT,
+      procesadores: core.cpus().length, 
       idProceso: process.pid,
-      modo:config.MODE
     };
     res.send(info);
   });
