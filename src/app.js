@@ -9,8 +9,10 @@ import passport from 'passport'
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import {fork} from 'child_process';
-import core from 'os'
-import cluster from 'cluster'
+import core from 'os';
+import cluster from 'cluster';
+import compression from 'compression';
+import log4js from 'log4js';
 
 //IMPORTS JS
 import __dirname from './utils.js';
@@ -22,62 +24,72 @@ import config,{argumentos} from './config.js';
 import { baseSession } from './config.js';
 import {initializePassport} from './passport-config.js';
 
-const admin =true;
-
-const app = express();
-
 mongoose.connect(config.mongo.url,{useNewUrlParser:true,useUnifiedTopology:true}).then(()=>{console.log("Mongodb esta conectado");}).catch(()=>{console.log("Mongodb se se ha podido conectar"),process.exit()});
 
-// if (config.MODE === "cluster" && cluster.isPrimary) {
-//     const hilos = core.cpus().length;
-//     console.log(`Proceso principal: ${process.pid} comenzando con ${hilos} workers`);
+const admin =true;
+const app = express();
 
-//     for (let i = 0; i < hilos; i++) {
-//       cluster.fork();
-//     }
-  
-//     // cluster.on("exit", (worker, _code, _signal) => {
-//     //   console.log(`El proceso ${worker.process.pid} se termino. Reiniciando proceso`);
-//     //   cluster.fork();
-//     // });
-//   }
-
-//   const server = app.listen(config.PORT,()=>{console.log("Escuchando en puerto " + config.PORT)});
 if (config.MODE === "cluster" && cluster.isPrimary) {
-    const hilos = core.cpus().length;
-    console.log(`Proceso iniciado: ${process.pid} con ${hilos} worker trabajando`);
+  const hilos = core.cpus().length;
+  console.log(`Proceso iniciado: ${process.pid} con ${hilos} worker trabajando`);
 
-    for (let i = 0; i < hilos; i++) {
-      cluster.fork();
-    }
+  for (let i = 0; i < hilos; i++) {
+    cluster.fork();
+  }
   
-    cluster.on("exit", (worker, _code, _signal) => {
-      console.log(`El proceso ${worker.process.pid} fallo.`);
-      cluster.fork();
-    });
-  } 
-    const server = app.listen(config.PORT, () => {
-      console.log(
-        "Escuchando en puerto " + config.PORT
-      );
-    });
-    server.on("error", (error) =>
-      console.log(`Error en servidor ${error}`)
-    );
+  cluster.on("exit", (worker, _code, _signal) => {
+    console.log(`El proceso ${worker.process.pid} fallo.`);
+    cluster.fork();
+  });
+} else{
+var server = app.listen(config.PORT, () => {console.log("Escuchando en puerto " + config.PORT);});
+server.on("error", (error) =>console.log(`Error en servidor ${error}`));
+}
 
 export const io = new Server(server);
-
-
-process.on('uncaughtException',(err)=>{
-    console.log('Captura de error: ', err)
-})
 
 
 //VIEWS
 app.engine('handlebars', engine());
 app.set('views',__dirname+'/viewsHandlebars');
 app.set('view engine','handlebars');
+//LOGGER
+log4js.configure({
+  appenders:{
+    console:{type:"console"},
+    error:{type:"file",filename:"./logger/error.log"},
+    info:{type:"file",filename:"./logger/info.log"},
+    warn:{type:"file",filename:"./logger/warn.log"},
+
+    errorFilter: {
+      type: "logLevelFilter",
+      appender: "error",
+      level: "error",
+      maxLevel: "error",
+    },
+    warnFilter: {
+      type: "logLevelFilter",
+      appender: "warn",
+      level: "warn",
+      maxLevel: "warn",
+    },
+    infoFilter: {
+      type: "logLevelFilter",
+      appender: "info",
+      level: "info",
+      maxLevel: "info",
+    },
+  },
+  categories:{
+    default:{
+      appenders:["console","errorFilter","warnFilter","infoFilter"],level:"info"
+    }
+  }
+})
+const logger =log4js.getLogger()
+
 //JSON
+app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
@@ -86,7 +98,8 @@ app.use(cors());
 app.use((req,res,next)=>{
     let timestamp = Date.now();
     let time = new Date(timestamp);
-    console.log('Hora de petición: '+time.toTimeString().split(" ")[0],req.method,req.url);
+    // console.log('Hora de petición: '+time.toTimeString().split(" ")[0],req.method,req.url);
+    logger.info(req.method,req.url);
     req.auth = admin; 
     next();
     
@@ -104,8 +117,11 @@ app.use(passport.session());
 app.use(express.static(__dirname+'/public'));
 app.use('/api/productos',products);
 app.use('/api/carritos',cart);
- 
 
+app.get('/api/error',(req,res)=>{
+  logger.error("Error")
+  res.send("error")
+});
 
 //SUBIR IMAGEN
 app.post('/api/uploadfile',upload.single('image'),(req,res)=>{
@@ -193,10 +209,11 @@ app.get("/api/random", (req, res) => {
   });
 
 
+
 //RUTA NO AUTORIZAADA
 app.use((req,res,next)=>{
-    res.status(404).send({error:-1,message:"La ruta que desea ingresar no existe"})
-    console.log("La ruta que desea ingresar no existe");
+    res.status(404).send({message:"La ruta que desea ingresar no existe"}) 
+    logger.warn(req.method,req.url,"La ruta que desea ingresar no existe" );
 })
 
 //SOCKET

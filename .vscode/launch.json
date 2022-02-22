@@ -14,7 +14,8 @@
             "program": "${workspaceFolder}\\src\\app.js",
             "env":{
                 "MONGO_URL":"mongodb+srv://Maxi:123@ecommerce.dgoa9.mongodb.net/Ecommerce?retryWrites=true&w=majority",
-                "SECRET":"D3s4f10"
+                "SECRET":"D3s4f10",
+                "NODE_ENV":"PROD"
             }
         }
     ]
