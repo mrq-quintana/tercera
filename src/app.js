@@ -57,9 +57,9 @@ app.set('view engine','handlebars');
 log4js.configure({
   appenders:{
     console:{type:"console"},
-    error:{type:"file",filename:"./logger/error.log"},
-    info:{type:"file",filename:"./logger/info.log"},
-    warn:{type:"file",filename:"./logger/warn.log"},
+    error:{type:"file",filename:"./src/logger/error.log"},
+    info:{type:"file",filename:"./src/logger/info.log"},
+    warn:{type:"file",filename:"./src/logger/warn.log"},
 
     errorFilter: {
       type: "logLevelFilter",

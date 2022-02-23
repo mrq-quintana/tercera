@@ -1,2 +1,4 @@
-[2022-02-22T13:10:11.064] [INFO] default - GET /api/errorm
-[2022-02-22T13:10:56.942] [INFO] default - GET /api/errorml
+[2022-02-23T13:47:06.753] [INFO] default - GET /api/info
+[2022-02-23T13:47:15.602] [INFO] default - GET /
+[2022-02-23T13:47:16.092] [INFO] default - GET /styles.css
+[2022-02-23T13:47:16.114] [INFO] default - GET /js/index.js
