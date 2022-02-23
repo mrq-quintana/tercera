@@ -32,7 +32,7 @@ export default {
         url:__dirname+'/files/'
     },
     mongo:{ 
-        url:process.env.MONGO_URL,
+        url:"mongodb+srv://Maxi:123@ecommerce.dgoa9.mongodb.net/Ecommerce?retryWrites=true&w=majority",
     },
     firebase:{
         "type": "service_account",
@@ -51,7 +51,7 @@ export default {
 export const baseSession = (session({
     // store:MongoStore.create({mongoUrl:process.env.MONGO_URL}),
     store:MongoStore.create({mongoUrl:"mongodb+srv://Maxi:123@ecommerce.dgoa9.mongodb.net/Ecommerce?retryWrites=true&w=majority"}),
-    secret:process.env.SECRET, 
+    secret:"D3s4f10", 
     resave:false,
     saveUninitialized:false,
     cookie:{maxAge:60000},
