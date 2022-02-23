@@ -10,14 +10,14 @@ const argumentos = yargs(process.argv.slice(2));
 export const argProcesados = argumentos.options({
     port: {
       alias: "p",
-      default: 8080,
-      describe: "Port to listen",
+      default: process.env.PORT || 8080,
+      describe: "Escuchando en el puerto",
       type: "number",
     },
     mode: {
       alias: "m",
       default: "fork",
-      describe: "Mode to run the server",
+      describe: "Modo que corre el server",
       type: "string",
       choices: ["fork", "cluster"],
     },
