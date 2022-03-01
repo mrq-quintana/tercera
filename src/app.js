@@ -13,6 +13,10 @@ import core from 'os';
 import cluster from 'cluster';
 import compression from 'compression';
 import log4js from 'log4js';
+import {mailing} from './comunication/gmail.js';
+import {smsing} from './comunication/sms.js';
+import {wsping} from './comunication/whatsApp.js' 
+
 
 //IMPORTS JS
 import __dirname from './utils.js';
@@ -206,6 +210,24 @@ app.get("/api/random", (req, res) => {
     });
   });
 
+app.get('/api/mail', (req, res) => {
+  mailing().then(result=>{
+    res.send(result);
+    console.log(result.message);
+  });
+});
+app.get('/api/sms', (req, res) => {
+  smsing().then(result=>{
+    res.send(result);
+    console.log(result.message);
+  });
+});
+app.get('/api/wsp', (req, res) => {
+  wsping().then(result=>{
+    res.send(result);
+    console.log(result.message);
+  });
+});
 
 
 //RUTA NO AUTORIZAADA
