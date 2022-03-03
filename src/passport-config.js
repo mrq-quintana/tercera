@@ -21,8 +21,8 @@ export const initializePassport = () =>{
                 edad:req.body.edad,
                 direccion:req.body.direccion,
                 rol:req.body.rol,
-                avatar:req.body.avatar,
-                     
+                avatar:toString(req.body.image),
+                carrito:[]                     
             };
             const mail ={
                 from:"Confirmacion de registro <mail>",
@@ -46,6 +46,7 @@ export const initializePassport = () =>{
             mailing(mailadmin);
             try {
                 let result = await usuario.saveUser(newUser);
+                console.log(result)
                 return done(null,result)
             } catch (error) {
                 return done(error); 
@@ -68,6 +69,7 @@ export const initializePassport = () =>{
     }))
   
     passport.serializeUser(async (user,done)=>{
+       
         done(null,user._id);
     })
     passport.deserializeUser(async(id,done)=>{

@@ -138,13 +138,14 @@ app.post('/api/uploadfile',upload.single('image'),(req,res)=>{
 })
 //SESION USUARIO
 app.get('/currentUser',(req,res)=>{
+  console.log(req.user)
     if (req.user) return res.send(req.user);
     return res.send({error:-2,message:"Session cerrada"})
 })
 
 //REGISTRO DE USUARIO
-app.post('/api/register',passport.authenticate('register',{failureRedirect:'/api/failedRegister'}),(req,res)=>{ 
-    res.send({message:"Registro correcto"})
+app.post('/api/register',upload.single('avatar'),passport.authenticate('register',{failureRedirect:'/api/failedRegister'}),(req,res)=>{ 
+  res.send({message:"Registro correcto"})
 })
 //FALLA DE REGISTRO
 app.get('/api/failedRegister',(req,res)=>{

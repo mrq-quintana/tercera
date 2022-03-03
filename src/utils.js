@@ -15,3 +15,4 @@ export default __dirname;
 export const passwordBcrypt = password =>bcrypt.hashSync(password,bcrypt.genSaltSync(10))
 export const passwordNoBcrypt =(user,password)=>bcrypt.compareSync(password,user.password)
 
+ 
