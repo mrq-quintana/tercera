@@ -1,24 +1,49 @@
 import passport from 'passport'
 import local from 'passport-local'
 import {usuario} from './daos/index.js'
+import { mailing} from './comunication/gmail.js';
 import { passwordBcrypt, passwordNoBcrypt } from './utils.js';
 
- 
 const LocalStrategy = local.Strategy;
 
 export const initializePassport = () =>{
-    passport.use('register', new LocalStrategy({passReqToCallback:true}, async(req,username,password,done)=>{
+    passport.use('register', new LocalStrategy({passReqToCallback:true,usernameField:"email"}, async(req,username,password,done)=>{
         try {
             let user = await usuario.getBy(username);  
             if(user)return done(null,false);
             const newUser ={
-                usuario: username,
-                password: passwordBcrypt(password),
-                email: req.body.email,
                 nombre:req.body.nombre,
                 apellido:req.body.apellido,
-                edad:req.body.edad,       
+                email: req.body.email,
+                telefono:req.body.telefono,
+                usuario: username,
+                password: passwordBcrypt(password),
+                edad:req.body.edad,
+                direccion:req.body.direccion,
+                rol:req.body.rol,
+                avatar:req.body.avatar,
+                     
             };
+            const mail ={
+                from:"Confirmacion de registro <mail>",
+                to: newUser.email,
+                subject: "Registro correcto",
+                html:`<h1 style="color:blue;"> Bienvenido registro correcto! </h1>`
+            }
+            const mailadmin ={
+                from:"Nuevo registro <mail>",
+                to: "mrq.quintana@gmail.com",
+                subject: "Nuevo registro",
+                html:`<h1 style="color:blue;"> ${newUser.nombre} ${newUser.apellido} </h1>
+                      <br>
+                      <h1 style="color:blue;"> ${newUser.direccion} </h1>
+                      <br>
+                      <h1 style="color:blue;"> ${newUser.telefono} </h1>
+                      <br>
+                      <h1 style="color:blue;"> ${newUser.email} </h1>`
+            }
+            mailing(mail);
+            mailing(mailadmin);
             try {
                 let result = await usuario.saveUser(newUser);
                 return done(null,result)

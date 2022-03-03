@@ -1,2 +1,9 @@
 [2022-03-01T11:46:23.444] [WARN] default - GET /favicon.ico La ruta que desea ingresar no existe
 [2022-03-01T14:40:58.097] [WARN] default - GET /api/sms La ruta que desea ingresar no existe
+[2022-03-02T14:11:21.843] [WARN] default - GET /login.html La ruta que desea ingresar no existe
+[2022-03-02T14:11:25.031] [WARN] default - GET /login.html La ruta que desea ingresar no existe
+[2022-03-02T14:11:31.947] [WARN] default - GET /login.html La ruta que desea ingresar no existe
+[2022-03-02T14:11:48.798] [WARN] default - GET /login.html La ruta que desea ingresar no existe
+[2022-03-03T13:35:50.015] [WARN] default - GET /api/failedLogin La ruta que desea ingresar no existe
+[2022-03-03T13:38:52.138] [WARN] default - GET /api/failedLogin La ruta que desea ingresar no existe
+[2022-03-03T13:39:16.356] [WARN] default - GET /api/failedLogin La ruta que desea ingresar no existe

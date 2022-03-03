@@ -32,9 +32,21 @@
                 <div class="form-floating form-input">
                     <input type="number" id="edad" name="edad">
                 </div>
+                <label for="direccion">Direccion</label>
+                <div class="form-floating form-input">
+                    <input type="text" id="direccion" name="direccion">
+                </div>
+                <label for="telefono">Telefono</label>
+                <div class="form-floating form-input">
+                    <input type="text" id="telefono" name="telefono">
+                </div>
                 <label for="username">Usuario</label>
                 <div class="form-floating form-input">
                     <input type="text" id="username" name="username" required>
+                </div>
+                <label for="role">Rol</label>
+                <div class="form-floating form-input">
+                    <input type="text" id="role" name="role" required>
                 </div>
                 <label for="email">Email</label>
                 <div class="form-floating form-input">
@@ -43,6 +55,18 @@
                 <label for="password">Contraseña</label>
                 <div class="form-floating form-input">
                     <input type="password" id="password" name="password" required>
+                </div>
+                <label for="image">Imagen</label>
+                <div class="form-floating form-input">
+                    <input class="form-control" type="file" accept="image/*" name="image" id="image" required>
+                </div>
+                <div style="display:flex">
+                    <div>
+                        <img id="preview">
+                    </div>
+                    <div style="width:100%; padding-top:100px">
+                        <p class="image-text">Subir imagen</p>
+                    </div>
                 </div>
                 <div class="form-floating form-input">
                     <input type="submit" value="Guardar" class="submit-button">
@@ -55,6 +79,7 @@
    
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/index.js"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
         integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>

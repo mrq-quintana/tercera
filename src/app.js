@@ -13,10 +13,6 @@ import core from 'os';
 import cluster from 'cluster';
 import compression from 'compression';
 import log4js from 'log4js';
-import {mailing} from './comunication/gmail.js';
-import {smsing} from './comunication/sms.js';
-import {wsping} from './comunication/whatsApp.js' 
-
 
 //IMPORTS JS
 import __dirname from './utils.js';
@@ -27,6 +23,10 @@ import cart from './routes/cart.js'
 import config,{argProcesados} from './config.js';
 import { baseSession } from './config.js';
 import {initializePassport} from './passport-config.js';
+import {mailing} from './comunication/gmail.js';
+import {smsing} from './comunication/sms.js';
+import {wsping} from './comunication/whatsApp.js' 
+
 
 mongoose.connect(config.mongo.url,{useNewUrlParser:true,useUnifiedTopology:true}).then(()=>{console.log("Mongodb esta conectado");}).catch(()=>{console.log("Mongodb se se ha podido conectar"),process.exit()});
 
@@ -146,7 +146,6 @@ app.get('/currentUser',(req,res)=>{
 app.post('/api/register',passport.authenticate('register',{failureRedirect:'/api/failedRegister'}),(req,res)=>{ 
     res.send({message:"Registro correcto"})
 })
-
 //FALLA DE REGISTRO
 app.get('/api/failedRegister',(req,res)=>{
     res.send({error: -2,message:'Error de autenticacion'}) 
@@ -209,7 +208,7 @@ app.get("/api/random", (req, res) => {
       console.log(`Peticion recibida al worker ${process.pid} finalizada`)
     });
   });
-
+//COMUNICACION
 app.get('/api/mail', (req, res) => {
   mailing().then(result=>{
     res.send(result);
@@ -228,14 +227,11 @@ app.get('/api/wsp', (req, res) => {
     console.log(result.message);
   });
 });
-
-
 //RUTA NO AUTORIZAADA
 app.use((req,res,next)=>{
     res.status(404).send({message:"La ruta que desea ingresar no existe"}) 
     logger.warn(req.method,req.url,"La ruta que desea ingresar no existe" );
 })
-
 //SOCKET
 io.on('connection', async socket=>{
     console.log(`El socket ${socket.id} se ha conectado`);
@@ -245,6 +241,7 @@ io.on('connection', async socket=>{
     socket.on('msj', async data=>{
         console.log(data) 
         console.log(socket.handshake.session.passport.user)
+        console.log(socket.handshake.session)
         let user = await usuario.getBy(socket.handshake.session.user)
         console.log(user)
         let mjs = {

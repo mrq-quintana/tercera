@@ -7,11 +7,10 @@ const client = twilio(sid,token);
 export async function wsping(){
     try{
         const message = await client.messages.create({
-            // body:"Hola esto es un whatsApp de prueba de Maxi Quintana",
-            body:"¡SOY PELIGROSO, RAWR!",
+            body:"Hola esto es un whatsApp de prueba de Maxi Quintana",
             from:"whatsapp:+14155238886",
             to:"whatsapp:+5491150123519",
-            mediaUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZe8xjSlSEI8a1SK92Jay9sPqJXumdLkVAAg&usqp=CAU"
+            // mediaUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZe8xjSlSEI8a1SK92Jay9sPqJXumdLkVAAg&usqp=CAU"
         })
         console.log(message);
         return ({message: "Mensaje de whatsapp enviado",result: message});

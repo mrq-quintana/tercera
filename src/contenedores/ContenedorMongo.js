@@ -114,7 +114,7 @@ export default class ContenedorMongo{
                                  await agregarUsuario.save();
             return agregarUsuario;   
         } catch (error) {
-            return {message: "No se pudo agregar usuario con errores " + error};
+            return {message: "No se pudo agregar usuario con error " + error};
         }
     }
     async saveCart() {
