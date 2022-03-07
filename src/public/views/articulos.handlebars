@@ -1,0 +1,16 @@
+<input type="button" onclick="location.href='../../pages/gestorArt.html'" value="Registrar un articulo">
+{{!-- <div id="bienvenido">Usuario</div>
+<div id="avatar">Imagen</div> --}}
+<input type="button" onclick="location.href='../api/logout'" value="Desloguearse">
+
+<div class="pet-container">
+    {{#each productos}}
+    <div class="pet-card">
+        <p>Titulo</p>
+        <p>{{this.title}}</p>
+        <p>{{this.price}}</p>
+        <p>{{this.description}}</p>
+        <img src="{{this.thumbnail}}">
+    </div>
+    {{/each}}
+</div>

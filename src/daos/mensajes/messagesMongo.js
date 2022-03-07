@@ -1,5 +1,5 @@
 import Schema from "mongoose";
-import ContenedorMongo from "../../contenedores/ContenedorMongo.js";
+import ContenedorMongo from "../contenedor/contenedor.js";
 
 export default class MessagesMongo extends ContenedorMongo{
     constructor(){

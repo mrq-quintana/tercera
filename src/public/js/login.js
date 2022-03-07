@@ -1,4 +1,3 @@
-
 let form  = document.getElementById("loginForm");
 form.addEventListener('submit',function(event){
     event.preventDefault();
@@ -29,7 +28,7 @@ form.addEventListener('submit',function(event){
                 icon:'success',
                 timer:5000,
             })
-            location.replace('./gestorArt.html');
+            location.replace('./articulos.html');
         }
     })
     form.reset();

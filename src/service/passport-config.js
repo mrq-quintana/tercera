@@ -1,34 +1,42 @@
 import passport from 'passport'
 import local from 'passport-local'
-import {usuario} from './daos/index.js'
-import { mailing} from './comunication/gmail.js';
-import { passwordBcrypt, passwordNoBcrypt } from './utils.js';
+import {usuario} from '../daos/index.js'
+import { mailing} from '../comunication/gmail.js';
+import { passwordBcrypt, passwordNoBcrypt } from '../utils.js';
 
 const LocalStrategy = local.Strategy;
 
 export const initializePassport = () =>{
-    passport.use('register', new LocalStrategy({passReqToCallback:true,usernameField:"email"}, async(req,username,password,done)=>{
+    passport.use('register', new LocalStrategy({
+        passReqToCallback:true,
+        usernameField:"email"
+    }, async(req,email,password,done)=>{
         try {
-            let user = await usuario.getBy(username);  
-            if(user)return done(null,false);
+            let emailUser = await usuario.getBy(email);  
+            if(emailUser)return done(null,false);
+            let avatar = req.protocol+"://"+req.hostname+":8080"+'/images/'+req.file.filename;
             const newUser ={
                 nombre:req.body.nombre,
                 apellido:req.body.apellido,
                 email: req.body.email,
                 telefono:req.body.telefono,
-                usuario: username,
+                usuario: req.body.username,
                 password: passwordBcrypt(password),
                 edad:req.body.edad,
                 direccion:req.body.direccion,
-                rol:req.body.rol,
-                avatar:toString(req.body.image),
+                rol:req.body.role,
+                avatar:req.file.path,
                 carrito:[]                     
             };
+            newUser.avatar = avatar;
+
             const mail ={
                 from:"Confirmacion de registro <mail>",
                 to: newUser.email,
                 subject: "Registro correcto",
-                html:`<h1 style="color:blue;"> Bienvenido registro correcto! </h1>`
+                html:`<h1 style="color:blue;"> Bienvenido registro correcto! </h1>
+                        <br>
+                        <img src=${newUser.avatar}>`
             }
             const mailadmin ={
                 from:"Nuevo registro <mail>",
@@ -45,9 +53,9 @@ export const initializePassport = () =>{
             mailing(mail);
             mailing(mailadmin);
             try {
-                let result = await usuario.saveUser(newUser);
-                console.log(result)
-                return done(null,result)
+                let user = await usuario.saveUser(newUser);
+                console.log(user)
+                return done(null,user)
             } catch (error) {
                 return done(error); 
             }
@@ -56,9 +64,14 @@ export const initializePassport = () =>{
         }
     }))
     
-    passport.use('login', new LocalStrategy(async(username,password,done)=>{
+    passport.use('login', new LocalStrategy({
+        passReqToCallback:true,
+        usernameField:"email"
+    }, 
+        async(req,email,password,done)=>{
         try {
-            let user = await usuario.getBy(username);
+            let user = await usuario.getBy(email);
+            console.log(user)
             if(!user)return done(null,false,{message:'Usuario no existe'});
             if(!passwordNoBcrypt(user,password)) return done(null,false,{message:'Password incorrecto'})
             console.log('Logueado');
@@ -68,12 +81,12 @@ export const initializePassport = () =>{
         }
     }))
   
-    passport.serializeUser(async (user,done)=>{
-       
+    passport.serializeUser(async (user,done)=>{ 
         done(null,user._id);
     })
+
     passport.deserializeUser(async(id,done)=>{
-        let getUser = await usuario.getById(id);
-        done(null,getUser);
+        let userId = await usuario.getById(id);
+        done(null,userId);
     })
 }

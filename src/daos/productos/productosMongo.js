@@ -1,4 +1,4 @@
-import ContenedorMongo from "../../contenedores/ContenedorMongo.js";
+import ContenedorMongo from "../contenedor/contenedor.js";
 
 export default class ProductoMongo extends ContenedorMongo{
     constructor(){

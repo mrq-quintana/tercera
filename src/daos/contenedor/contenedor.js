@@ -1,4 +1,9 @@
 import mongoose from 'mongoose';
+import config from '../../config.js'
+
+mongoose.connect(config.mongo.url,{useNewUrlParser:true,useUnifiedTopology:true})
+    .then(()=>{console.log("Mongodb esta conectado");})
+    .catch(()=>{console.log("Mongodb se se ha podido conectar"),process.exit()});
 
 export default class ContenedorMongo{
     constructor(collection,schema,timestamps){
@@ -42,9 +47,9 @@ export default class ContenedorMongo{
         } catch(error){return {message: "No se pudo realizar accion " + error};}
   
     }
-    async getBy(usuario){
+    async getBy(email){
         try{
-            let doc = await this.collection.find({usuario:usuario});
+            let doc = await this.collection.find({email:email});
             if (doc) return doc[0];
         } catch(error){
             return {message: "No se pudo realizar accion " + error};
