@@ -54,7 +54,6 @@ export const initializePassport = () =>{
             mailing(mailadmin);
             try {
                 let user = await usuario.saveUser(newUser);
-                console.log(user)
                 return done(null,user)
             } catch (error) {
                 return done(error); 
@@ -71,7 +70,6 @@ export const initializePassport = () =>{
         async(req,email,password,done)=>{
         try {
             let user = await usuario.getBy(email);
-            console.log(user)
             if(!user)return done(null,false,{message:'Usuario no existe'});
             if(!passwordNoBcrypt(user,password)) return done(null,false,{message:'Password incorrecto'})
             console.log('Logueado');

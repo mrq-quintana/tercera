@@ -4,6 +4,7 @@ import cors from 'cors';
 import {Server} from 'socket.io';
 import ios from 'socket.io-express-session';
 import {engine} from 'express-handlebars';
+import exphbs from 'express-handlebars';
 import passport from 'passport'
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
@@ -54,7 +55,7 @@ export const io = new Server(server);
 // app.set('view engine','ejs');
 //VIEWS
 app.engine('handlebars', engine());
-app.set('views',__dirname+'/public/views');
+app.set('views',__dirname+'/views');
 app.set('view engine','handlebars');
 //JSON
 app.use(compression());
@@ -79,14 +80,15 @@ app.use('/api/carritos',cart);
 //RUTAS
 
 //SESION USUARIO
-app.get('/currentUser',isAuthenticated,(req,res)=>{
-  if (req.user) return res.send(req.user);
-  res.redirect('/api/login')
+app.get('/api/currentUser',isAuthenticated,(req,res)=>{
+  let usuarioActual = req.user;
+  if (usuarioActual) return res.render('perfil', usuarioActual[0])
+  else               return res.redirect('/api/login')
 })
 
 //PAGINA DE INICIO
 app.get('/',(req,res)=>{
-  res.render('index')
+  res.redirect('/api/articulos')
 })
 
 //REGISTRO DE USUARIO
@@ -115,7 +117,7 @@ app.get('/api/login',(req,res)=>{
 
 app.post('/api/login',passport.authenticate('login',{
   failureRedirect:'/api/login',
-  successRedirect:'/currentUser',
+  successRedirect:'/api/currentUser',
 }
 ), async (req,res)=>{
     res.send({message:"Login correcto"});
@@ -132,16 +134,13 @@ app.get('/api/logout', (req,res)=>{
 })
 
 //VISTA ARTICULOS
-app.get('/api/articulos',(req,res)=>{
-    productos.getAll().then(result=>{
-        let info = result.product;
-        let articulos ={
-            productos:info
-        };
-        console.log(articulos)    
-        res.render('articulos',articulos)
-    })
-})
+app.get('/api/articulos',async (req,res)=>{
+  let result = await productos.getAll();
+  let products = result.product
+  console.log(products)
+    res.render('art', products[0])
+  })
+
 //INFO
 app.get('/api/info', (req, res) => {
     const info = {
