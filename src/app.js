@@ -146,6 +146,7 @@ app.get('/api/articulos',(req,res)=>{
   })
 })
 
+
 //INFO
 app.get('/api/info', (req, res) => {
     const info = {
