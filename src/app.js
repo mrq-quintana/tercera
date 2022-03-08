@@ -4,7 +4,6 @@ import cors from 'cors';
 import {Server} from 'socket.io';
 import ios from 'socket.io-express-session';
 import {engine} from 'express-handlebars';
-import exphbs from 'express-handlebars';
 import passport from 'passport'
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
@@ -54,9 +53,12 @@ export const io = new Server(server);
 // app.set('views',__dirname + '/public/views');
 // app.set('view engine','ejs');
 //VIEWS
+// app.engine('handlebars', engine());
 app.engine('handlebars', engine());
 app.set('views',__dirname+'/views');
 app.set('view engine','handlebars');
+
+
 //JSON
 app.use(compression());
 app.use(express.json());
@@ -134,12 +136,15 @@ app.get('/api/logout', (req,res)=>{
 })
 
 //VISTA ARTICULOS
-app.get('/api/articulos',async (req,res)=>{
-  let result = await productos.getAll();
-  let products = result.product
-  console.log(products)
-    res.render('art', products[0])
+app.get('/api/articulos',(req,res)=>{
+  productos.getAll().then(result=>{
+    let preparedObject={
+      pro : result.product
+    }
+    console.log(preparedObject)
+    res.render('art', preparedObject[0])
   })
+})
 
 //INFO
 app.get('/api/info', (req, res) => {

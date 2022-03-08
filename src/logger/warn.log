@@ -305,3 +305,5 @@
 [2022-03-07T20:28:39.398] [WARN] default - GET /currentUser La ruta que desea ingresar no existe
 [2022-03-07T20:28:46.529] [WARN] default - GET /currentUser La ruta que desea ingresar no existe
 [2022-03-07T22:13:40.327] [WARN] default - GET /api/:%22http://localhost:8080/images/1646515758573WhatsApp La ruta que desea ingresar no existe
+[2022-03-08T09:31:08.475] [WARN] default - GET /favicon.ico La ruta que desea ingresar no existe
+[2022-03-08T12:05:56.410] [WARN] default - POST /api/articulos La ruta que desea ingresar no existe

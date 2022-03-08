@@ -1,20 +1,27 @@
-<div class="main-container">
-<div class="form-container">
-<h1>Articulos</h1>
-<div>
-  {{codigo}}
-  <br>
-  {{description}}
-  <br>
-  {{price}}
-  <br>
-  {{_id}}
-  <br>
-</div> 
-<div>  
-  <img width="100" height="100" src="{{thumbnail}}">
-</div>
-</div> 
+{{#each pro}}
+  <div class="pet-container">
+    <h1>Articulos</h1>
+    <div>
+          "{{this.codigo}}"
+          <br>
+          {{this.description}}
+          <br>
+          {{this.price}}
+          <br>
+          {{this._id}}
+          <br>
+    </div> 
+    <div>  
+          <img width="100" height="100" src={{this.thumbnail}}>
+    </div>
+    <div>
+      <input type="button" value="Agregar">
+    </div>
+  </div>
+{{/each}}
+  
+  
+
 
 
 
