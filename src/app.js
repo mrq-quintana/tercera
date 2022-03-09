@@ -92,6 +92,7 @@ app.get('/api/currentUser',isAuthenticated,(req,res)=>{
 app.get('/api/perfil',(req,res)=>{
    res.render('perfil')
 })
+
 app.get('/api/gestor',(req,res)=>{
   res.render('gestor')
 })
@@ -142,16 +143,7 @@ app.get('/api/logout', (req,res)=>{
   req.logout();
   res.redirect('/api/login');   
 })
-
 //VISTA ARTICULOS
-// app.get('/api/articulos',(req,res)=>{
-//   productos.getAll()
-    // .then(data=>{
-//     let result={pro:data.product}
-//     res.render('art', result)
-//  } )
-// })
-
 app.get('/api/articulos',(req,res)=>{
   productos.getAll().then(data=>{
     let result=data.product
@@ -159,7 +151,6 @@ app.get('/api/articulos',(req,res)=>{
   
  } )
 })
-
 
 //INFO
 app.get('/api/info', (req, res) => {
@@ -175,7 +166,6 @@ app.get('/api/info', (req, res) => {
     };
     res.send(info);
   });
-
 
 //COMUNICACION
 app.get('/api/mail', (req, res) => {
@@ -197,39 +187,11 @@ app.get('/api/wsp', (req, res) => {
   });
 });
 
-
-
 //RUTA NO AUTORIZAADA
 app.use((req,res,next)=>{
     res.status(404).send({message:"La ruta que desea ingresar no existe"}) 
     logger.warn(req.method,req.url,"La ruta que desea ingresar no existe" );
 })
 
-
-
-//SOCKET
-io.on('connection', async socket=>{
-    console.log(`El socket ${socket.id} se ha conectado`);
-    let products = await productos.getAll();
-
-    socket.emit('actualiza', products); 
-    socket.on('msj', async data=>{
-        console.log(data) 
-        console.log(socket.handshake.session.passport.user)
-        console.log(socket.handshake.session)
-        let user = await usuario.getBy(socket.handshake.session.user)
-        console.log(user)
-        let mjs = {
-            user:user.user._id,//ACA ESTA EL ERROR 
-            usuario:user.user.usuario,
-            message: data.message
-        }
-            await mensajes.saveMessage(mjs);
-        const textos = await mensajes.getAll();
-        console.log(textos.product)
-        io.emit('log',textos.product); 
-
-        })
-})
 
 
