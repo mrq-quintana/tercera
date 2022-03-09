@@ -28,7 +28,7 @@
     "express": "^4.17.2",
     "express-ejs": "^2.0.0",
     "express-ejs-layouts": "^2.5.1",
-    "express-handlebars": "^6.0.1",
+    "express-handlebars": "^4.5.0",
     "express-session": "^1.17.2",
     "firebase": "^9.6.1",
     "firebase-admin": "^10.0.1",
@@ -51,11 +51,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mrq-quintana/Nginx.git"
+    "url": "git+https://github.com/mrq-quintana/tercera"
   },
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/mrq-quintana/Nginx/issues"
+    "url": "https://github.com/mrq-quintana/tercera/issues"
   },
-  "homepage": "https://github.com/mrq-quintana/Nginx#readme"
+  "homepage": "https://github.com/mrq-quintana/tercera#readme"
 }

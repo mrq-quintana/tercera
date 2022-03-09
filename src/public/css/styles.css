@@ -1,6 +1,9 @@
 .main-container{
     padding:20px 0;
 }
+#idProducto{
+    visibility:hidden;
+}
 .form-container{
     width:850px;
     align-items: center;

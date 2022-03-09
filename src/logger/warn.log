@@ -307,3 +307,13 @@
 [2022-03-07T22:13:40.327] [WARN] default - GET /api/:%22http://localhost:8080/images/1646515758573WhatsApp La ruta que desea ingresar no existe
 [2022-03-08T09:31:08.475] [WARN] default - GET /favicon.ico La ruta que desea ingresar no existe
 [2022-03-08T12:05:56.410] [WARN] default - POST /api/articulos La ruta que desea ingresar no existe
+[2022-03-08T21:38:35.582] [WARN] default - GET /api/carritos La ruta que desea ingresar no existe
+[2022-03-08T22:46:01.540] [WARN] default - GET /public/js/currentUser.js La ruta que desea ingresar no existe
+[2022-03-08T23:05:12.424] [WARN] default - GET /api/api/currentUser La ruta que desea ingresar no existe
+[2022-03-08T23:05:57.780] [WARN] default - GET /currentUser La ruta que desea ingresar no existe
+[2022-03-08T23:06:18.630] [WARN] default - GET /api/api/currentUser La ruta que desea ingresar no existe
+[2022-03-08T23:21:57.344] [WARN] default - POST /api/currentUser La ruta que desea ingresar no existe
+[2022-03-08T23:28:18.510] [WARN] default - GET /api/currentUser La ruta que desea ingresar no existe
+[2022-03-09T00:02:03.784] [WARN] default - GET /templates/productsTable.handlebars La ruta que desea ingresar no existe
+[2022-03-09T00:16:43.232] [WARN] default - GET /images/1646515377143WhatsApp La ruta que desea ingresar no existe
+[2022-03-09T00:16:43.249] [WARN] default - GET /images/1646515758573WhatsApp La ruta que desea ingresar no existe

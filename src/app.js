@@ -84,8 +84,12 @@ app.use('/api/carritos',cart);
 //SESION USUARIO
 app.get('/api/currentUser',isAuthenticated,(req,res)=>{
   let usuarioActual = req.user;
-  if (usuarioActual) return res.render('perfil', usuarioActual[0])
+  if (usuarioActual) return res.send(usuarioActual)
   else               return res.redirect('/api/login')
+})
+
+app.get('/api/perfil',(req,res)=>{
+   res.render('perfil')
 })
 
 //PAGINA DE INICIO
@@ -136,14 +140,20 @@ app.get('/api/logout', (req,res)=>{
 })
 
 //VISTA ARTICULOS
+// app.get('/api/articulos',(req,res)=>{
+//   productos.getAll()
+    // .then(data=>{
+//     let result={pro:data.product}
+//     res.render('art', result)
+//  } )
+// })
+
 app.get('/api/articulos',(req,res)=>{
-  productos.getAll().then(result=>{
-    let preparedObject={
-      pro : result.product
-    }
-    console.log(preparedObject)
-    res.render('art', preparedObject[0])
-  })
+  productos.getAll().then(data=>{
+    let result=data.product
+    res.render('art', result)
+  
+ } )
 })
 
 
