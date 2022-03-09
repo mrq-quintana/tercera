@@ -3,6 +3,7 @@ import upload from '../service/upload.js';
 import { io } from '../app.js';
 import { authAdmin } from '../utils.js'
 import {productos} from '../daos/index.js'
+import { config } from 'yargs';
 const router = express.Router();
 
 
@@ -38,7 +39,7 @@ router.delete('/', (req,res)=>{
 router.post('/',authAdmin,upload.single('image'),(req, res)=>{
     console.log(req.file)
     let productoAgregar = req.body;
-    let thumbnail = req.protocol+"://"+req.hostname+":"+req.port+"/images/"+req.file.filename;
+    let thumbnail = req.protocol+"://"+req.hostname+":"+config.PORT+"/images/"+req.file.filename;
     productoAgregar.thumbnail = thumbnail;
     productos.saveProduct(productoAgregar).then(result=>{
         res.send(result);
