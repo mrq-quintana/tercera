@@ -2,7 +2,8 @@
     padding:20px 0;
 }
 #idProducto{
-    visibility:hidden;
+    /* color:transparent; */
+    color:black;
 }
 .form-container{
     width:850px;
@@ -12,7 +13,7 @@
     border-radius:5px;
     height:100%;
     padding:5px 25px;
-    background-color:rgba(0, 19, 192, 0.575);
+    background-color:rgba(72, 12, 95, 0.562);
 }
 .form{
     padding-top:5px;

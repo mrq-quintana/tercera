@@ -1,0 +1,53 @@
+
+
+    <div id="bienvenido"></div>
+    <div id="avatar"></div>
+    
+
+    <div class="main-container">
+        <div class="form-container">
+            <h1 class="title">Gestor de articulos</h1>
+            <form id="formProduct" name="formProduct" class="form">
+                <label for="title">Nombre del articulo: </label>
+                <div class="form-floating form-input">
+                    <input class="form-control" type="text" name="title" id="name" placeholder="name" required>
+                </div>
+                <label for="price">Precio: </label>
+                <div class="form-floating form-input">
+                    <input class="form-control" type="number" name="price" id="price" placeholder="price" required>
+                </div>
+                <label for="description">Descripcion</label>
+                <div class="form-floating form-input">
+                    <input class="form-control" type="text" name="description" id="description" placeholder="description"
+                        required>
+                </div>
+                <label for="codigo">Codigo</label>
+                <div class="form-floating form-input">
+                    <input class="form-control" type="text" name="codigo" id="codigo" placeholder="codigo"
+                        required>
+                </div>
+                <label for="stock">Stock</label>
+                <div class="form-floating form-input">
+                    <input class="form-control" type="text" name="stock" id="stock" placeholder="stock"
+                        required>
+                </div>
+                <label for="image">Imagen</label>
+                <div class="form-floating form-input">
+                    <input class="form-control" type="file" accept="image/*" name="image" id="image" required>
+                </div>
+                <div style="display:flex">
+                    <div>
+                        <img id="preview">
+                    </div>
+                    <div style="width:100%; padding-top:100px">
+                        <p class="image-text">Subir imagen</p>
+                    </div>
+                </div>
+                <div style="margin-top:30px; display:flex; justify-content: center;">
+                    <input type="submit" class="submit-button">
+                </div>
+        </div>
+        </form>       
+    </div>
+    <script src="../js/currentUser.js"></script>
+    <script src="../js/gestor.js"></script>

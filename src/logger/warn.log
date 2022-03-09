@@ -317,3 +317,14 @@
 [2022-03-09T00:02:03.784] [WARN] default - GET /templates/productsTable.handlebars La ruta que desea ingresar no existe
 [2022-03-09T00:16:43.232] [WARN] default - GET /images/1646515377143WhatsApp La ruta que desea ingresar no existe
 [2022-03-09T00:16:43.249] [WARN] default - GET /images/1646515758573WhatsApp La ruta que desea ingresar no existe
+[2022-03-09T11:11:40.644] [WARN] default - GET /favicon.ico La ruta que desea ingresar no existe
+[2022-03-09T13:54:38.013] [WARN] default - GET /public/js/currentUser.js La ruta que desea ingresar no existe
+[2022-03-09T13:54:38.022] [WARN] default - GET /public/js/gestor.js La ruta que desea ingresar no existe
+[2022-03-09T13:55:20.787] [WARN] default - GET /public/js/currentUser.js La ruta que desea ingresar no existe
+[2022-03-09T13:55:20.830] [WARN] default - GET /public/js/gestor.js La ruta que desea ingresar no existe
+[2022-03-09T13:55:22.610] [WARN] default - GET /public/js/currentUser.js La ruta que desea ingresar no existe
+[2022-03-09T13:55:22.615] [WARN] default - GET /public/js/gestor.js La ruta que desea ingresar no existe
+[2022-03-09T13:55:53.031] [WARN] default - GET /public/js/currentUser.js La ruta que desea ingresar no existe
+[2022-03-09T13:55:53.332] [WARN] default - GET /public/js/currentUser.js La ruta que desea ingresar no existe
+[2022-03-09T13:55:58.748] [WARN] default - GET /public/js/currentUser.js La ruta que desea ingresar no existe
+[2022-03-09T13:55:58.995] [WARN] default - GET /public/js/currentUser.js La ruta que desea ingresar no existe

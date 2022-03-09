@@ -1,7 +1,7 @@
 fetch('/api/currentUser')
 .then(res => res.json())
 .then(json=>{usuario=json
-    
+    console.log(json)
     let bienvenido = document.getElementById('bienvenido');
     let avatar = document.getElementById('avatar');
     let email = document.getElementById('email');

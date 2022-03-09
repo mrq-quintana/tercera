@@ -84,12 +84,16 @@ app.use('/api/carritos',cart);
 //SESION USUARIO
 app.get('/api/currentUser',isAuthenticated,(req,res)=>{
   let usuarioActual = req.user;
+  console.log(usuarioActual)
   if (usuarioActual) return res.send(usuarioActual)
   else               return res.redirect('/api/login')
 })
 
 app.get('/api/perfil',(req,res)=>{
    res.render('perfil')
+})
+app.get('/api/gestor',(req,res)=>{
+  res.render('gestor')
 })
 
 //PAGINA DE INICIO
@@ -123,7 +127,7 @@ app.get('/api/login',(req,res)=>{
 
 app.post('/api/login',passport.authenticate('login',{
   failureRedirect:'/api/login',
-  successRedirect:'/api/currentUser',
+  successRedirect:'/api/perfil',
 }
 ), async (req,res)=>{
     res.send({message:"Login correcto"});

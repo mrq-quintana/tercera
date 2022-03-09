@@ -2,6 +2,7 @@
     <div class="main-container">
         <div class="form-container">
             <h2 class="title">Por favor registrese</h2>
+            <p>Ya esta registrado? Ingrese <a href="/api/login">Ingresar</a></p>
             <form action="/api/register" method="post" enctype="multipart/form-data" id="registerForm" name="registerForm" class="form" >
                 <label for="nombre">Nombre</label>
                 <div class="form-floating form-input">
@@ -47,15 +48,14 @@
                     <div>
                         <img id="preview">
                     </div>
-                    <div style="width:100%; padding-top:100px">
+                </form>
+                    <div style="width:100%; margin-left: 100px; padding-top:100px">
+                        <input type="submit" value="Guardar" class="submit-button">
+                    </div>
+                    <div style="width:100%; margin-left: -100px ; padding-top:90px" class="form-floating form-input">
                         <p class="image-text">Subir imagen</p>
                     </div>
                 </div>
-                <div class="form-floating form-input">
-                    <input type="submit" value="Guardar" class="submit-button">
-                </div>
-            </form>
-            <p>Ya esta registrado? Ingrese <a href="/api/login">Ingresar</a></p>
         </div>
     </div>
     <script src="../js/index.js"></script>

@@ -40,5 +40,5 @@ export const baseSession = (session({
     rolling: true,
     resave: false,
     saveUninitialized: false,
-    cookie:{maxAge:600000},
+    cookie:{maxAge:60000},
 }))
