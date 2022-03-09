@@ -38,7 +38,7 @@ router.delete('/', (req,res)=>{
 router.post('/',authAdmin,upload.single('image'),(req, res)=>{
     console.log(req.file)
     let productoAgregar = req.body;
-    let thumbnail = req.protocol+"://"+req.hostname+":8080"+'/images/'+req.file.filename;
+    let thumbnail = req.protocol+"://"+req.hostname+":"+req.port+"/images/"+req.file.filename;
     productoAgregar.thumbnail = thumbnail;
     productos.saveProduct(productoAgregar).then(result=>{
         res.send(result);
