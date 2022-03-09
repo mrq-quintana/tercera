@@ -14,7 +14,7 @@ export const initializePassport = () =>{
         try {
             let emailUser = await usuario.getBy(email);  
             if(emailUser)return done(null,false);
-            let avatar = req.protocol+"://"+req.hostname+":8080"+'/images/'+req.file.filename;
+            let avatar = req.protocol+"://"+req.hostname+":"+req.port+"/images/"+req.file.filename;
             const newUser ={
                 nombre:req.body.nombre,
                 apellido:req.body.apellido,
