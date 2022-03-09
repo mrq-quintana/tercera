@@ -3,7 +3,7 @@ import upload from '../service/upload.js';
 import { io } from '../app.js';
 import { authAdmin } from '../utils.js'
 import {productos} from '../daos/index.js'
-import { config } from 'yargs';
+import { config } from '../config.js';
 const router = express.Router();
 
 
