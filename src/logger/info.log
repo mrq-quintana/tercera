@@ -5879,3 +5879,14 @@
 [2022-03-09T14:08:33.399] [INFO] default - GET /images/1646515377143WhatsApp%20Image%202021-08-25%20at%2013.27.42%20(1).jpeg
 [2022-03-09T14:08:33.409] [INFO] default - GET /images/1646515758573WhatsApp%20Image%202021-08-25%20at%2013.27.43.jpeg
 [2022-03-09T14:08:33.415] [INFO] default - GET /images/1646844371085WhatsApp%20Image%202021-08-25%20at%2013.29.47.jpeg
+[2022-03-10T08:55:55.549] [INFO] default - GET /api/register
+[2022-03-10T08:55:56.232] [INFO] default - GET /js/index.js
+[2022-03-10T08:55:56.301] [INFO] default - GET /css/styles.css
+[2022-03-10T08:55:56.786] [INFO] default - GET /favicon.ico
+[2022-03-10T08:56:38.985] [INFO] default - GET /api/gestor
+[2022-03-10T08:56:39.280] [INFO] default - GET /css/styles.css
+[2022-03-10T08:56:39.286] [INFO] default - GET /js/currentUser.js
+[2022-03-10T08:56:39.334] [INFO] default - GET /js/gestor.js
+[2022-03-10T08:56:39.447] [INFO] default - GET /api/currentUser
+[2022-03-10T08:56:39.579] [INFO] default - GET /api/login
+[2022-03-10T08:57:10.051] [INFO] default - POST /api/productos
