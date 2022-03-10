@@ -329,3 +329,9 @@
 [2022-03-09T13:55:58.748] [WARN] default - GET /public/js/currentUser.js La ruta que desea ingresar no existe
 [2022-03-09T13:55:58.995] [WARN] default - GET /public/js/currentUser.js La ruta que desea ingresar no existe
 [2022-03-10T08:55:56.798] [WARN] default - GET /favicon.ico La ruta que desea ingresar no existe
+[2022-03-10T10:56:27.640] [WARN] default - POST /api/carrito La ruta que desea ingresar no existe
+[2022-03-10T11:37:10.929] [WARN] default - GET /public/js/art.js La ruta que desea ingresar no existe
+[2022-03-10T11:37:11.116] [WARN] default - GET /public/js/art.js La ruta que desea ingresar no existe
+[2022-03-10T11:38:01.736] [WARN] default - GET /public/js/art.js La ruta que desea ingresar no existe
+[2022-03-10T11:51:59.128] [WARN] default - GET /api/carritos La ruta que desea ingresar no existe
+[2022-03-10T11:53:02.753] [WARN] default - GET /api/carritos/ La ruta que desea ingresar no existe

@@ -124,7 +124,7 @@ export default class ContenedorMongo{
     async saveCart() {
         try {
           let cart = await this.collection.insertMany();
-          return {message: "Carrito creado con ID "+ cart[0]._id};     
+          return {cart: cart[0]._id, message: "Carrito creado con ID "+ cart[0]._id};     
         } catch (error){
             return {message: "No se pudo agregar carrito " + error};
         }
@@ -143,6 +143,18 @@ export default class ContenedorMongo{
         try{
             if(await this.collection.countDocuments({_id:id}) === 1){
                 await this.collection.updateOne({_id:id},body);
+                return { message: id+" modificado correctamente"};
+            }else{
+                return { message: "No hay item para modificar"};
+            } 
+        }catch(error){
+            return {message: "No se pudo agregar Producto " + error};
+        }
+    }
+    async updateUser(id, user) {    
+        try{
+            if(await this.collection.countDocuments({_id:id}) === 1){
+                await this.collection.updateOne({_id:id},user);
                 return { message: id+" modificado correctamente"};
             }else{
                 return { message: "No hay item para modificar"};

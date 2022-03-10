@@ -15,10 +15,11 @@ export default class UsersMongo extends ContenedorMongo{
             direccion:{ type:String, required:true},
             rol:{ type:String, required:true},
             avatar:{ type:Object, required:true},
-            carrito:[{
-                type:Boolean,
-                default:true
-            }]    
+            // carrito:[{
+            //     type:Boolean,
+            //     default:true
+            // }]
+            carrito:[{type:Object}]    
             },
             {timestamps:true},
         ) 

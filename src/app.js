@@ -84,7 +84,6 @@ app.use('/api/carritos',cart);
 //SESION USUARIO
 app.get('/api/currentUser',isAuthenticated,(req,res)=>{
   let usuarioActual = req.user;
-  console.log(usuarioActual)
   if (usuarioActual) return res.send(usuarioActual)
   else               return res.redirect('/api/login')
 })
@@ -99,7 +98,7 @@ app.get('/api/gestor',(req,res)=>{
 
 //PAGINA DE INICIO
 app.get('/',(req,res)=>{
-  res.redirect('/api/articulos')
+  res.redirect('/api/login')
 })
 
 //REGISTRO DE USUARIO
@@ -147,9 +146,8 @@ app.get('/api/logout', (req,res)=>{
 app.get('/api/articulos',(req,res)=>{
   productos.getAll().then(data=>{
     let result=data.product
-    res.render('art', result)
-  
- } )
+    res.render('art', result) 
+ })
 })
 
 //INFO

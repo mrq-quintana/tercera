@@ -11,7 +11,6 @@ const router = express.Router();
 router.get('/', (req,res)=>{
     productos.getAll().then((result)=>{
         res.send(result);
-        console.log(result.message);
     })
 })
 router.get('/:id', (req,res)=>{

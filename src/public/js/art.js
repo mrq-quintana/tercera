@@ -2,16 +2,18 @@ let bienvenido = document.getElementById('bienvenido');
 let avatar = document.getElementById('avatar');
 let tabla = document.getElementById('idProductos')
 let idProducto = document.getElementById('idProducto')
-agregarId = []
 
+//MUESTRA USUARIO
 fetch('/api/currentUser')
 .then(res => res.json())
 .then(json=>{usuario=json
+ 
     bienvenido.innerHTML = 'Usuario: ' + usuario[0].usuario;
     avatar.innerHTML = '<img width="100" height="100" src="' + usuario[0].avatar + '">';
+   
 })
 
-
+//MUESTRA PRODUCTOS
 fetch('/api/productos')
 .then(res => res.json())
     .then(info=>{
@@ -30,9 +32,3 @@ fetch('/api/productos')
                                     </div>`;
     })
 })
-
-function agregarProducto(){
-    let value = document.getElementById('idProducto').innerText
-    agregarId.push(value)
-    console.log(agregarId)
-}
