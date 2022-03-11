@@ -1,5 +1,5 @@
 import express from 'express';
-import {carrito, usuario} from '../daos/index.js'
+import {carrito, usuario, productos} from '../daos/index.js'
 
 const router = express.Router();
 
@@ -9,10 +9,18 @@ const router = express.Router();
 router.get('/:id', (req,res)=>{
     const usuarioId = req.params.id;
     carrito.getById(usuarioId).then((result)=>{
-        res.send(result);
-        console.log(result);
+        res.send(result[0].productos);
+        let productosDeCarrito = result[0].productos;
+        productosDeCarrito.map(productoDeCarrito=>{
+            productos.getById(productoDeCarrito).then((result)=>{
+                console.log(result);
+            })
+        })
     })
 })
+router.get('/', (req,res)=>{
+  res.render('carrito')
+    })
 
 
 
@@ -24,17 +32,18 @@ router.post('/',(req, res)=>{
         req.user[0].carrito=cart;
         usuario.updateUser(idUser,req.user[0]).then(result=>{
             res.send(result);
-            console.log(req.user)
+    
         })
     })
 })
 
-router.post('/:id',(req, res)=>{
+router.post('/:id/:pid',(req, res)=>{
     const idCarrito = req.params.id;
-    let idAgregar = req.body.id; 
+    const idAgregar = req.params.pid;
     carrito.addToCart(idAgregar,idCarrito).then(result=>{
-        res.send(result);
         console.log(result)
+        res.send(result);
+        
     })
 })
 

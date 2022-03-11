@@ -9,7 +9,7 @@ fetch('/api/currentUser')
 .then(json=>{usuario=json
  
     bienvenido.innerHTML = 'Usuario: ' + usuario[0].usuario;
-    avatar.innerHTML = '<img width="100" height="100" src="' + usuario[0].avatar + '">';
+    avatar.innerHTML = '<img width="30" height="30" src="' + usuario[0].avatar + '">';
    
 })
 

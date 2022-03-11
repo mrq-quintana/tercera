@@ -77,7 +77,7 @@ app.use(passport.session());
 //ROUTER
 app.use(express.static(__dirname+'/public'));
 app.use('/api/productos',products);
-app.use('/api/carritos',cart);
+app.use('/api/carrito',cart);
 
 //RUTAS
 
