@@ -8882,3 +8882,5 @@
 [2022-03-11T00:13:11.765] [INFO] default - GET /api/currentUser
 [2022-03-11T00:13:11.789] [INFO] default - GET /images/1646675144380WhatsApp%20Image%202021-08-25%20at%2013.27.43%20(1).jpeg
 [2022-03-11T00:13:12.325] [INFO] default - GET /api/carrito/622abe3e74faba3331f986b1
+[2022-03-11T00:17:12.180] [INFO] default - GET /images/1646675144380WhatsApp%20Image%202021-08-25%20at%2013.27.43%20(1).jpeg
+[2022-03-11T00:17:12.207] [INFO] default - GET /images/1646913430114WhatsApp%20Image%202021-08-25%20at%2013.27.43%20(1).jpeg
